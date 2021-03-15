@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnhollowerBaseLib;
 using System.Linq;
 using Jester;
+using InnerNet;
 
 namespace Sheriff
 {
@@ -129,6 +130,33 @@ namespace Sheriff
             writer = AmongUsClient.Instance.StartRpc(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.SetLocalPlayersSheriff, Hazel.SendOption.Reliable);
             writer.WriteBytesAndSize(Sheriff.localPlayers.Select(player => player.PlayerId).ToArray());
             writer.EndMessage();
+        }
+
+        [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
+        public static void Postfix(PlayerControl __instance)
+        {
+            if (!Sheriff.sheriffEnabled)
+            {
+                return;
+            }
+
+            if (AmongUsClient.Instance.GameState != InnerNetClient.Nested_0.Started)
+                return;
+
+            if (__instance == null)
+            {
+                return;
+            }
+
+            if (!Sheriff.introDone)
+            {
+                return;
+            }
+
+            if (PlayerController.getLocalPlayer().hasComponent("Sheriff"))
+            {
+                PlayerControl.LocalPlayer.nameText.Color = Sheriff.sheriffColor;
+            }
         }
     }
 }
