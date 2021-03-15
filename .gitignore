@@ -1,2 +1,5 @@
 
 Sheriff/Sheriff.sln
+Sheriff/Sheriff/bin/*
+Sheriff/Sheriff/obj/*
+Sheriff/.vs/Sheriff/v16/.suo
