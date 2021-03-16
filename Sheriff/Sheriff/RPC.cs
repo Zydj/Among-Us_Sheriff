@@ -16,6 +16,7 @@ namespace Sheriff
         SyncCustomSettingsJester = 42,
         SetLastPlayerTask = 43,
         SetSheriff = 44,
-        SetLocalPlayersSheriff = 45
+        SetLocalPlayersSheriff = 45,
+        SheriffKill = 46
     }
 }
