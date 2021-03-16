@@ -21,11 +21,6 @@ namespace Sheriff
 
             if (PlayerController.getLocalPlayer().hasComponent("Sheriff"))
             {
-                if (Sheriff.debug)
-                {
-                    Sheriff.log.LogMessage("Setting sheriff intro");
-                }
-
                 __instance.__this.Title.Text = "Sheriff";
                 __instance.__this.Title.Color = Sheriff.sheriffColor;
                 __instance.__this.ImpostorText.Text = "Kill the [FF0000FF]Impostor";
