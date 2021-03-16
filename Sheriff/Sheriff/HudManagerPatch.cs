@@ -18,8 +18,6 @@ namespace Sheriff
         [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
         static void Postfix(HudManager __instance)
         {
-            /*HUD = __instance;
-            KillButton = __instance.KillButton;*/
 
             if (!Sheriff.sheriffEnabled)
             {
@@ -74,13 +72,13 @@ namespace Sheriff
                                 float magnitude = targetPosition.magnitude;
 
                                 if (magnitude <= range && !PhysicsHelpers.AnyNonTriggersBetween(sheriffPosition, targetPosition.normalized, magnitude, Constants.ShipAndObjectsMask))
-                                {
+                                {                                         
                                     nearest = target;
                                     range = magnitude;
                                 }
                             }
                         }
-
+                       
                         if (nearest != null)
                         {
                             __instance.KillButton.SetTarget(nearest);
