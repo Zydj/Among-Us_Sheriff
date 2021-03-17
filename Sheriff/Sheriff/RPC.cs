@@ -17,6 +17,7 @@ namespace Sheriff
         SetLastPlayerTask = 43,
         SetSheriff = 44,
         SetLocalPlayersSheriff = 45,
-        SheriffKill = 46
+        SheriffKill = 46,
+        SyncCustomSettingsSheriff = 47
     }
 }
