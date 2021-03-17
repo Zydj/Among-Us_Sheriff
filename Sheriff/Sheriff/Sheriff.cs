@@ -14,8 +14,7 @@ namespace Sheriff
      *      - add option for only sheriff dies if he kills crewmate for low player count lobbies
      *      - make jester menu options work with sheriff menu options
      *      - check if the jester mod used before accessing info from it
-     *      - kill cooldown only starts when the intro is done and the player can move
-     *      - bug where a player that was the shreiff on the previous round still has name with sheriff color. might be caused by something else
+     *      - kill cooldown only starts when the intro is done and the player can move     
     */
 
 
@@ -33,6 +32,7 @@ namespace Sheriff
         public static bool introDone= false;
 
         public static float sheriffKillCooldown = 25f;
+        public static float sheriffKillCooldownValue = sheriffKillCooldown;
 
         public static PlayerControl localPlayer = null;
         public static List<PlayerControl> localPlayers = new List<PlayerControl>();

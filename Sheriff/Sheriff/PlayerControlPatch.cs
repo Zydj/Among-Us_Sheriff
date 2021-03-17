@@ -32,7 +32,12 @@ namespace Sheriff
                         PlayerController.InitPlayers();
                         Player p = PlayerController.getPlayerById(HFPCBBHJIPJ.ReadByte());
                         p.components.Add("Sheriff");
-                       
+
+                        if (PlayerController.getLocalPlayer().hasComponent("Sheriff"))
+                        {
+                            Sheriff.sheriffKillCooldown = 10;
+                        }
+
                         if (Sheriff.debug)
                         {
                             Sheriff.log.LogMessage("Sheriff is: " + p.playerdata.nameText.Text);
@@ -91,7 +96,7 @@ namespace Sheriff
                 case (byte)CustomRPC.SyncCustomSettingsSheriff:
                     {
                         Sheriff.sheriffEnabled = HFPCBBHJIPJ.ReadBoolean();
-                        Sheriff.sheriffKillCooldown = System.BitConverter.ToSingle(HFPCBBHJIPJ.ReadBytes(4).ToArray(), 0);
+                        Sheriff.sheriffKillCooldownValue = System.BitConverter.ToSingle(HFPCBBHJIPJ.ReadBytes(4).ToArray(), 0);
                         break;
                     }
             }
@@ -152,9 +157,11 @@ namespace Sheriff
             writer.Write(sheriff.playerdata.PlayerId);
             writer.EndMessage();
             sheriff.components.Add("Sheriff");
-            
-            HudManagerPatch.killTimer = 10;
-            
+
+            if (PlayerController.getLocalPlayer().hasComponent("Sheriff"))
+            {
+                Sheriff.sheriffKillCooldown = 10;
+            }
 
             Sheriff.localPlayers.Clear();
             Sheriff.localPlayer = PlayerControl.LocalPlayer;
@@ -194,6 +201,10 @@ namespace Sheriff
             {
                 PlayerControl.LocalPlayer.nameText.Color = Sheriff.sheriffColor;
             }
+            else if (!PlayerController.getLocalPlayer().playerdata.Data.LGEGJEHCFOG)
+            {
+                PlayerControl.LocalPlayer.nameText.Color = Palette.White;
+            }
         }
 
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.MurderPlayer))]
@@ -210,8 +221,9 @@ namespace Sheriff
             }
         }
 
+        [HarmonyPostfix]
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.MurderPlayer))]
-        public static void Postfix(PlayerControl __instance, PlayerControl PAIBDFDMIGK)
+        public static void Postfix1(PlayerControl __instance)
         {
             if (!Sheriff.sheriffEnabled)
             {
@@ -225,13 +237,13 @@ namespace Sheriff
         }
 
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.RpcSyncSettings))]
-        public static void Postfix(GameOptionsData OMFKMPLOPPM)
+        public static void Postfix()
         {
             if (PlayerControl.AllPlayerControls.Count > 1)
             {
                 MessageWriter writer = AmongUsClient.Instance.StartRpc(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.SyncCustomSettingsSheriff, Hazel.SendOption.Reliable);
                 writer.Write(Sheriff.sheriffEnabled);
-                writer.Write(Sheriff.sheriffKillCooldown);
+                writer.Write(Sheriff.sheriffKillCooldownValue);
                 writer.EndMessage();
             }
         }
