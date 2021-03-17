@@ -11,8 +11,7 @@ namespace Sheriff
     {
         public static HudManager HUD;
         public static KillButtonManager KillButton;
-        public static float killTimer = 10f;
-        public static float killCooldown = 10f;
+        public static float killTimer;
         public static PlayerControl nearest;
 
         [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
@@ -44,7 +43,7 @@ namespace Sheriff
                     __instance.KillButton.gameObject.SetActive(true);
                     __instance.KillButton.isActive = true;
 
-                    if (PlayerControl.LocalPlayer.CanMove)
+                    if (PlayerControl.LocalPlayer.CanMove && Sheriff.introDone)
                     {
                         PlayerControl sheriff = PlayerControl.LocalPlayer;
 
@@ -54,7 +53,7 @@ namespace Sheriff
                             killTimer = 0;
                         }
 
-                        __instance.KillButton.SetCoolDown(killTimer, killCooldown);
+                        __instance.KillButton.SetCoolDown(killTimer, Sheriff.sheriffKillCooldown);
 
                         float range = GameOptionsData.KillDistances[Mathf.Clamp(PlayerControl.GameOptions.KillDistance, 0, 2)];
 
