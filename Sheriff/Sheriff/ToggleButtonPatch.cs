@@ -18,6 +18,17 @@ namespace Sheriff
 
                 return false;
             }
+            else if (__instance.TitleText.Text == "Classic Sheriff")
+            {               
+                Sheriff.classicSheriff = !Sheriff.classicSheriff;
+                PlayerControl.LocalPlayer.RpcSyncSettings(PlayerControl.GameOptions);
+
+                __instance.oldValue = Sheriff.classicSheriff;
+                __instance.CheckMark.enabled = Sheriff.classicSheriff;
+
+                return false;
+            }
+
             return true;
         }
     }
