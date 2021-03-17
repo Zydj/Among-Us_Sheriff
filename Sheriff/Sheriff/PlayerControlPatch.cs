@@ -99,6 +99,7 @@ namespace Sheriff
                     {
                         Sheriff.sheriffEnabled = HFPCBBHJIPJ.ReadBoolean();
                         Sheriff.sheriffKillCooldownValue = System.BitConverter.ToSingle(HFPCBBHJIPJ.ReadBytes(4).ToArray(), 0);
+                        Sheriff.classicSheriff = HFPCBBHJIPJ.ReadBoolean();
                         break;
                     }
             }
@@ -248,6 +249,7 @@ namespace Sheriff
                 MessageWriter writer = AmongUsClient.Instance.StartRpc(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.SyncCustomSettingsSheriff, Hazel.SendOption.Reliable);
                 writer.Write(Sheriff.sheriffEnabled);
                 writer.Write(Sheriff.sheriffKillCooldownValue);
+                writer.Write(Sheriff.classicSheriff);
                 writer.EndMessage();
             }
         }
