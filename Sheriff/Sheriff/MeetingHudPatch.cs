@@ -36,7 +36,7 @@ namespace Sheriff
                 return;
             }
 
-            HudManagerPatch.killTimer = Sheriff.sheriffKillCooldown;
+            Sheriff.sheriffKillCooldown = Sheriff.sheriffKillCooldownValue;
         }
     }
 }

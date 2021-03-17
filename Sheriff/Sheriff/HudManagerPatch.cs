@@ -45,15 +45,16 @@ namespace Sheriff
 
                     if (PlayerControl.LocalPlayer.CanMove && Sheriff.introDone)
                     {
-                        PlayerControl sheriff = PlayerControl.LocalPlayer;
+                        PlayerControl sheriff = PlayerControl.LocalPlayer;                        
 
-                        killTimer = Math.Max(0, killTimer - Time.deltaTime);
-                        if (killTimer <= 0)
+                        Sheriff.sheriffKillCooldown = Math.Max(0, Sheriff.sheriffKillCooldown - Time.deltaTime);
+
+                        if (Sheriff.sheriffKillCooldown <= 0)
                         {
-                            killTimer = 0;
+                            Sheriff.sheriffKillCooldown = 0;
                         }
 
-                        __instance.KillButton.SetCoolDown(killTimer, Sheriff.sheriffKillCooldown);
+                        __instance.KillButton.SetCoolDown(Sheriff.sheriffKillCooldown, Sheriff.sheriffKillCooldownValue);
 
                         float range = GameOptionsData.KillDistances[Mathf.Clamp(PlayerControl.GameOptions.KillDistance, 0, 2)];
 
@@ -87,6 +88,11 @@ namespace Sheriff
                             __instance.KillButton.PerformKill();
                         }
                     }
+                }
+                else if (PlayerControl.LocalPlayer.Data.AKOHOAJIHBE && !PlayerControl.LocalPlayer.Data.LGEGJEHCFOG)
+                {
+                    __instance.KillButton.gameObject.SetActive(false);
+                    __instance.KillButton.isActive = false;
                 }
             }
         }

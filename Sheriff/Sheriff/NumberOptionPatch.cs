@@ -14,13 +14,13 @@ namespace Sheriff
                 return true;
             }
 
-            Sheriff.sheriffKillCooldown = Math.Min(Sheriff.sheriffKillCooldown + 2.5f, 40);
+            Sheriff.sheriffKillCooldownValue = Math.Min(Sheriff.sheriffKillCooldownValue + 2.5f, 40);
 
             PlayerControl.LocalPlayer.RpcSyncSettings(PlayerControl.GameOptions);
 
-            GameOptionsMenuPatch.sheriffKillCooldown.Field_3 = Sheriff.sheriffKillCooldown;
-            GameOptionsMenuPatch.sheriffKillCooldown.Value = Sheriff.sheriffKillCooldown;
-            GameOptionsMenuPatch.sheriffKillCooldown.ValueText.Text = Sheriff.sheriffKillCooldown.ToString();
+            GameOptionsMenuPatch.sheriffKillCooldown.Field_3 = Sheriff.sheriffKillCooldownValue;
+            GameOptionsMenuPatch.sheriffKillCooldown.Value = Sheriff.sheriffKillCooldownValue;
+            GameOptionsMenuPatch.sheriffKillCooldown.ValueText.Text = Sheriff.sheriffKillCooldownValue.ToString();
             
             return false;
         }
@@ -34,13 +34,13 @@ namespace Sheriff
                 return true;
             }
 
-            Sheriff.sheriffKillCooldown = Math.Max(Sheriff.sheriffKillCooldown - 2.5f, 10);
+            Sheriff.sheriffKillCooldownValue = Math.Max(Sheriff.sheriffKillCooldownValue - 2.5f, 10);
 
             PlayerControl.LocalPlayer.RpcSyncSettings(PlayerControl.GameOptions);
 
-            GameOptionsMenuPatch.sheriffKillCooldown.Field_3 = Sheriff.sheriffKillCooldown;
-            GameOptionsMenuPatch.sheriffKillCooldown.Value = Sheriff.sheriffKillCooldown;
-            GameOptionsMenuPatch.sheriffKillCooldown.ValueText.Text = Sheriff.sheriffKillCooldown.ToString();
+            GameOptionsMenuPatch.sheriffKillCooldown.Field_3 = Sheriff.sheriffKillCooldownValue;
+            GameOptionsMenuPatch.sheriffKillCooldown.Value = Sheriff.sheriffKillCooldownValue;
+            GameOptionsMenuPatch.sheriffKillCooldown.ValueText.Text = Sheriff.sheriffKillCooldownValue.ToString();
 
             return false;
         }
