@@ -27,5 +27,16 @@ namespace Sheriff
                 }
             }
         }
+
+        [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Close))]
+        public static void Postfix()
+        {
+            if (!Sheriff.sheriffEnabled)
+            {
+                return;
+            }
+
+            HudManagerPatch.killTimer = Sheriff.sheriffKillCooldown;
+        }
     }
 }
