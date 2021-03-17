@@ -14,7 +14,7 @@ namespace Sheriff
 
         public static float defaultBounds;
 
-        [HarmonyPatch(typeof(GameOptionsMenu), nameof(GameOptionsMenu.Start))]        
+        [HarmonyPatch(typeof(GameOptionsMenu), nameof(GameOptionsMenu.Start))]
         public static void Postfix(GameOptionsMenu __instance)
         {
             if (Sheriff.debug)
@@ -38,9 +38,9 @@ namespace Sheriff
             {
                 showSheriffOption.transform.position = option.transform.position - new Vector3(0, 0.5f, 0);
                 sheriffKillCooldown.transform.position = option.transform.position - new Vector3(0, 1f, 0);
-                showClassicSheriffOption.transform.position = option.transform.position - new Vector3(0, 1.5f, 0);                
+                showClassicSheriffOption.transform.position = option.transform.position - new Vector3(0, 1.5f, 0);
 
-                __instance.GetComponentInParent<Scroller>().YBounds.max = defaultBounds + 1.5f;
+                __instance.GetComponentInParent<Scroller>().YBounds.max = defaultBounds + 0.5f;
             }
         }
     }

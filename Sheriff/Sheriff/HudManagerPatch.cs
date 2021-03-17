@@ -17,7 +17,6 @@ namespace Sheriff
         [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
         static void Postfix(HudManager __instance)
         {
-
             if (!Sheriff.sheriffEnabled)
             {
                 return;
@@ -45,7 +44,7 @@ namespace Sheriff
 
                     if (PlayerControl.LocalPlayer.CanMove && Sheriff.introDone)
                     {
-                        PlayerControl sheriff = PlayerControl.LocalPlayer;                        
+                        PlayerControl sheriff = PlayerControl.LocalPlayer;
 
                         Sheriff.sheriffKillCooldown = Math.Max(0, Sheriff.sheriffKillCooldown - Time.deltaTime);
 
@@ -72,13 +71,13 @@ namespace Sheriff
                                 float magnitude = targetPosition.magnitude;
 
                                 if (magnitude <= range && !PhysicsHelpers.AnyNonTriggersBetween(sheriffPosition, targetPosition.normalized, magnitude, Constants.ShipAndObjectsMask))
-                                {                                         
+                                {
                                     nearest = target;
                                     range = magnitude;
                                 }
                             }
                         }
-                       
+
                         if (nearest != null)
                         {
                             __instance.KillButton.SetTarget(nearest);

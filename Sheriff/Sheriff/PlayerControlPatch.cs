@@ -8,7 +8,6 @@ using InnerNet;
 
 namespace Sheriff
 {
-
     [HarmonyPatch]
     public static class PlayerControlPatch
     {

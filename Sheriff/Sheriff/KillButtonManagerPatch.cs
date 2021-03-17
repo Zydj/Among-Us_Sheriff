@@ -33,7 +33,7 @@ namespace Sheriff
                     if (Sheriff.debug)
                     {
                         Sheriff.log.LogMessage("Target acquired");
-                    }                    
+                    }
 
                     if (Sheriff.debug)
                     {

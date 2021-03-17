@@ -21,7 +21,7 @@ namespace Sheriff
             GameOptionsMenuPatch.sheriffKillCooldown.Field_3 = Sheriff.sheriffKillCooldownValue;
             GameOptionsMenuPatch.sheriffKillCooldown.Value = Sheriff.sheriffKillCooldownValue;
             GameOptionsMenuPatch.sheriffKillCooldown.ValueText.Text = Sheriff.sheriffKillCooldownValue.ToString();
-            
+
             return false;
         }
 

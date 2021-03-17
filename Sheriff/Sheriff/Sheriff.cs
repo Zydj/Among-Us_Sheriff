@@ -10,10 +10,8 @@ namespace Sheriff
 {
     /*
      * @TODO:
-     *      - cleanup code
      *      - check if the jester mod used before accessing info from it   
     */
-
 
     [BepInPlugin(Id)]
     [BepInProcess("Among Us.exe")]
@@ -24,9 +22,9 @@ namespace Sheriff
 
         public const string Id = "org.bepinex.plugins.Sheriff";
         public static BepInEx.Logging.ManualLogSource log;
-        
+
         public static bool sheriffEnabled = true;
-        public static bool introDone= false;
+        public static bool introDone = false;
         public static bool classicSheriff = true;
 
         public static float sheriffKillCooldown = 25f;
@@ -47,6 +45,6 @@ namespace Sheriff
             log.LogMessage("Sheriff Mod Loaded");
 
             Harmony.PatchAll();
-        }        
+        }
     }
 }
