@@ -17,7 +17,16 @@ namespace Sheriff
                 __result += "Show Sheriff: Off\n";
             }
 
-            __result += "Sheriff Kill Cooldown: " + Sheriff.sheriffKillCooldown.ToString() + "s";
+            __result += "Sheriff Kill Cooldown: " + Sheriff.sheriffKillCooldownValue.ToString() + "s\n";
+
+            if (Sheriff.classicSheriff)
+            {
+                __result += "Classic Sheriff: On\n";
+            }
+            else
+            {
+                __result += "Classic Sheriff: Off\n";
+            }
         }
     }
 }
