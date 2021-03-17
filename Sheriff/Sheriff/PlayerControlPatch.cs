@@ -52,7 +52,7 @@ namespace Sheriff
                         if (Sheriff.debug)
                         {
                             Sheriff.log.LogMessage("Setting local players for sheriff");
-                        }                        
+                        }
 
                         Sheriff.localPlayers.Clear();
                         Sheriff.localPlayer = PlayerControl.LocalPlayer;
@@ -146,17 +146,20 @@ namespace Sheriff
 
             Player sheriff = crewmates[sheriffId];
 
-            /*while (Jester.PlayerController.getPlayerById((byte)sheriff.PlayerId).hasComponent("Jester"))
+            if (Harmony.HasAnyPatches("org.bepinex.plugins.Jester"))
             {
-                if (Sheriff.debug)
+                while (Jester.PlayerController.getPlayerById((byte)sheriff.PlayerId).hasComponent("Jester"))
                 {
-                    Sheriff.log.LogMessage("Player is already jester. Finding a new player");
-                }*/
+                    if (Sheriff.debug)
+                    {
+                        Sheriff.log.LogMessage("Player is already jester. Finding a new player");
+                    }
 
-                sheriffId = new System.Random().Next(0, crewmates.Count);
+                    sheriffId = new System.Random().Next(0, crewmates.Count);
 
-                sheriff = crewmates[sheriffId];
-            //}
+                    sheriff = crewmates[sheriffId];
+                }
+            }
 
             MessageWriter writer = AmongUsClient.Instance.StartRpc(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.SetSheriff, Hazel.SendOption.Reliable);
             writer.Write(sheriff.playerdata.PlayerId);
