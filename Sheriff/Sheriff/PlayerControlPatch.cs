@@ -87,6 +87,13 @@ namespace Sheriff
                         }
                         break;
                     }
+
+                case (byte)CustomRPC.SyncCustomSettingsSheriff:
+                    {
+                        Sheriff.sheriffEnabled = HFPCBBHJIPJ.ReadBoolean();
+                        Sheriff.sheriffKillCooldown = System.BitConverter.ToSingle(HFPCBBHJIPJ.ReadBytes(4).ToArray(), 0);
+                        break;
+                    }
             }
         }
 
@@ -129,22 +136,25 @@ namespace Sheriff
 
             Player sheriff = crewmates[sheriffId];
 
-            while (Jester.PlayerController.getPlayerById((byte)sheriff.PlayerId).hasComponent("Jester"))
+            /*while (Jester.PlayerController.getPlayerById((byte)sheriff.PlayerId).hasComponent("Jester"))
             {
                 if (Sheriff.debug)
                 {
                     Sheriff.log.LogMessage("Player is already jester. Finding a new player");
-                }
+                }*/
 
                 sheriffId = new System.Random().Next(0, crewmates.Count);
 
                 sheriff = crewmates[sheriffId];
-            }
+            //}
 
             MessageWriter writer = AmongUsClient.Instance.StartRpc(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.SetSheriff, Hazel.SendOption.Reliable);
             writer.Write(sheriff.playerdata.PlayerId);
             writer.EndMessage();
-            sheriff.components.Add("Sheriff");            
+            sheriff.components.Add("Sheriff");
+            
+            HudManagerPatch.killTimer = 10;
+            
 
             Sheriff.localPlayers.Clear();
             Sheriff.localPlayer = PlayerControl.LocalPlayer;
@@ -211,6 +221,18 @@ namespace Sheriff
             if (__instance.PlayerId == PlayerController.getPlayerByRole("Sheriff").PlayerId)
             {
                 __instance.Data.LGEGJEHCFOG = false;
+            }
+        }
+
+        [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.RpcSyncSettings))]
+        public static void Postfix(GameOptionsData OMFKMPLOPPM)
+        {
+            if (PlayerControl.AllPlayerControls.Count > 1)
+            {
+                MessageWriter writer = AmongUsClient.Instance.StartRpc(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.SyncCustomSettingsSheriff, Hazel.SendOption.Reliable);
+                writer.Write(Sheriff.sheriffEnabled);
+                writer.Write(Sheriff.sheriffKillCooldown);
+                writer.EndMessage();
             }
         }
     }
