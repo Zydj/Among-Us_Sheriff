@@ -21,7 +21,7 @@ namespace Sheriff
 
             Player sheriff = PlayerController.getPlayerByRole("Sheriff");
 
-            if (HudManagerPatch.killTimer == 0)
+            if (Sheriff.sheriffKillCooldown == 0)
             {
                 if (sheriff.playerdata.CanMove)
                 {
@@ -43,11 +43,14 @@ namespace Sheriff
 
                     MessageWriter writer;
 
-                    writer = AmongUsClient.Instance.StartRpc(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.SheriffKill, Hazel.SendOption.Reliable);
-                    writer.Write(PlayerControl.LocalPlayer.PlayerId);                    
-                    writer.Write(HudManagerPatch.nearest.PlayerId);                   
-                    writer.EndMessage();                   
-                    PlayerControl.LocalPlayer.MurderPlayer(HudManagerPatch.nearest);
+                    if (Sheriff.classicSheriff)
+                    {
+                        writer = AmongUsClient.Instance.StartRpc(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.SheriffKill, Hazel.SendOption.Reliable);
+                        writer.Write(PlayerControl.LocalPlayer.PlayerId);
+                        writer.Write(HudManagerPatch.nearest.PlayerId);
+                        writer.EndMessage();
+                        PlayerControl.LocalPlayer.MurderPlayer(HudManagerPatch.nearest);
+                    }
 
                     if (!HudManagerPatch.nearest.Data.LGEGJEHCFOG)
                     {
@@ -58,8 +61,8 @@ namespace Sheriff
                         PlayerControl.LocalPlayer.MurderPlayer(PlayerControl.LocalPlayer);
                     }
 
-                    PlayerControl.LocalPlayer.SetKillTimer(Sheriff.sheriffKillCooldown);
-                    HudManagerPatch.killTimer = Sheriff.sheriffKillCooldown;
+                    PlayerControl.LocalPlayer.SetKillTimer(Sheriff.sheriffKillCooldownValue);
+                    HudManagerPatch.killTimer = Sheriff.sheriffKillCooldownValue;
                 }
             }
             return false;
