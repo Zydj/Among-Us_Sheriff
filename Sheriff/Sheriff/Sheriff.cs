@@ -10,11 +10,8 @@ namespace Sheriff
 {
     /*
      * @TODO:
-     *      - cleanup code 
-     *      - add option for only sheriff dies if he kills crewmate for low player count lobbies
-     *      - make jester menu options work with sheriff menu options
-     *      - check if the jester mod used before accessing info from it
-     *      - kill cooldown only starts when the intro is done and the player can move     
+     *      - cleanup code
+     *      - check if the jester mod used before accessing info from it   
     */
 
 
@@ -30,6 +27,7 @@ namespace Sheriff
         
         public static bool sheriffEnabled = true;
         public static bool introDone= false;
+        public static bool classicSheriff = true;
 
         public static float sheriffKillCooldown = 25f;
         public static float sheriffKillCooldownValue = sheriffKillCooldown;
