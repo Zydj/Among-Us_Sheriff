@@ -29,6 +29,8 @@ namespace Sheriff
                             Sheriff.log.LogMessage("Setting Sheriff");
                         }
 
+                        Sheriff.introDone = false;
+
                         PlayerController.InitPlayers();
                         Player p = PlayerController.getPlayerById(HFPCBBHJIPJ.ReadByte());
                         p.components.Add("Sheriff");
@@ -50,7 +52,7 @@ namespace Sheriff
                         if (Sheriff.debug)
                         {
                             Sheriff.log.LogMessage("Setting local players for sheriff");
-                        }
+                        }                        
 
                         Sheriff.localPlayers.Clear();
                         Sheriff.localPlayer = PlayerControl.LocalPlayer;
@@ -132,6 +134,8 @@ namespace Sheriff
             {
                 return;
             }
+
+            Sheriff.introDone = false;
 
             PlayerController.InitPlayers();
 
