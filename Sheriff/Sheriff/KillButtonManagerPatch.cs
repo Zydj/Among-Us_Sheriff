@@ -58,8 +58,8 @@ namespace Sheriff
                         PlayerControl.LocalPlayer.MurderPlayer(PlayerControl.LocalPlayer);
                     }
 
-                    PlayerControl.LocalPlayer.SetKillTimer(HudManagerPatch.killCooldown);
-                    HudManagerPatch.killTimer = HudManagerPatch.killCooldown;
+                    PlayerControl.LocalPlayer.SetKillTimer(Sheriff.sheriffKillCooldown);
+                    HudManagerPatch.killTimer = Sheriff.sheriffKillCooldown;
                 }
             }
             return false;
