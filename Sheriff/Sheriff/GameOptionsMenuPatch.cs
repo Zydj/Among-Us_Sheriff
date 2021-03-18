@@ -9,7 +9,7 @@ namespace Sheriff
         public static ToggleOption showSheriffOption;
         public static NumberOption sheriffKillCooldown;
         public static ToggleOption showClassicSheriffOption;
-        
+
         public static OptionBehaviour option;
 
         public static GameOptionsMenu instance;
@@ -28,7 +28,7 @@ namespace Sheriff
 
             defaultBounds = __instance.GetComponentInParent<Scroller>().YBounds.max;
 
-            option = __instance.Children[__instance.Children.Count-1];
+            option = __instance.Children[__instance.Children.Count - 1];
 
             CustomPlayerMenuPatch.AddOptions();
         }
