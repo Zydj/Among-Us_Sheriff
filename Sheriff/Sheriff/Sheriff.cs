@@ -10,7 +10,7 @@ namespace Sheriff
 {
     /*
      * @TODO:
-     *      - check if the jester mod used before accessing info from it   
+     *      - Sheriff and jester compatibility for menu options
     */
 
     [BepInPlugin(Id)]
