@@ -8,17 +8,12 @@ using UnityEngine;
 
 namespace Sheriff
 {
-    /*
-     * @TODO:
-     *      - Sheriff and jester compatibility for menu options
-    */
-
     [BepInPlugin(Id)]
     [BepInProcess("Among Us.exe")]
     [BepInDependency(ReactorPlugin.Id)]
     public class Sheriff : BasePlugin
     {
-        public static bool debug = true;
+        public static bool debug = false;
 
         public const string Id = "org.bepinex.plugins.Sheriff";
         public static BepInEx.Logging.ManualLogSource log;
